@@ -1,0 +1,18 @@
+name: prove
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Sintassi
+        run: bash -n install.sh && bash -n test-install.sh
+      - name: shellcheck
+        run: shellcheck -S warning install.sh
+      - name: Prove
+        run: bash test-install.sh
