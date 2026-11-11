@@ -50,7 +50,7 @@ printf '\n== chi non vede il repo\n'
 rm -rf "$TMP/home/.cato-dev-env" "$TMP/home/.cato-setup"; : > "$TMP/senza-accesso"
 out="$(lancia)"; rc=$?
 t "si ferma"                       "$rc" "1"
-t "e dice chi e' e cosa chiedere"  "$(printf '%s' "$out" | grep -c 'persona-finta) non vede il repo')" "1"
+t "e dice chi e' e cosa chiedere"  "$(printf '%s' "$out" | grep -c 'persona-finta) cannot see the')" "1"
 rm -f "$TMP/senza-accesso"
 
 printf '\n== un ~/.cato-setup vecchio non si tocca\n'

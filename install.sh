@@ -18,10 +18,10 @@ die() { printf '\n  ✗ %s\n' "$*" >&2; exit 1; }
 # `CATO_INSTALL_PROVA=1` salta i due controlli sull'ambiente (macOS, terminale): serve alle prove in
 # CI, che girano su Linux e senza terminale. Non cambia nient'altro.
 if [ "${CATO_INSTALL_PROVA:-0}" != 1 ]; then
-[ "$(uname -s)" = Darwin ] || die "questo installer e' per macOS"
+[ "$(uname -s)" = Darwin ] || die "this installer is for macOS"
 # Con `curl … | bash` lo stdin e' lo script stesso: Homebrew e il login GitHub non potrebbero chiedere
 # niente, e l'installazione si fermerebbe a meta' con un errore che non dice perche'.
-[ -t 0 ] || die "lancialo cosi', non con una pipe:
+[ -t 0 ] || die "run it like this, not through a pipe:
     /bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/$REPO-install/main/install.sh)\""
 fi
 
@@ -30,10 +30,10 @@ if ! command -v brew > /dev/null 2>&1; then
   for b in /opt/homebrew/bin/brew /usr/local/bin/brew; do [ -x "$b" ] && { eval "$("$b" shellenv)"; break; }; done
 fi
 if ! command -v brew > /dev/null 2>&1; then
-  echo "  lo installo: il Mac ti chiede la password una volta"
+  echo "  installing it: the Mac asks for your password once"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   for b in /opt/homebrew/bin/brew /usr/local/bin/brew; do [ -x "$b" ] && { eval "$("$b" shellenv)"; break; }; done
-  command -v brew > /dev/null 2>&1 || die "Homebrew non risulta installato: rilancia questo comando"
+  command -v brew > /dev/null 2>&1 || die "Homebrew does not look installed: run this command again"
 fi
 # Senza questa riga, nel prossimo Terminale `brew` e tutto quello che installa non ci sarebbero.
 riga="eval \"\$($(command -v brew) shellenv)\""
@@ -43,22 +43,22 @@ ok "$(brew --version | head -1)"
 say "GitHub"
 command -v gh > /dev/null 2>&1 || brew install gh > /dev/null
 if ! gh auth status -h github.com > /dev/null 2>&1; then
-  echo "  si apre il browser: entra con il tuo utente GitHub"
+  echo "  the browser opens: sign in with your GitHub user"
   gh auth login -h github.com -p https -w -s read:packages
 fi
 gh auth setup-git > /dev/null 2>&1 || true
 utente="$(gh api user -q .login 2> /dev/null || echo "?")"
-ok "sei $utente"
+ok "you are $utente"
 
-say "Il repo del dev-env"
+say "The dev-env repo"
 if [ -d "$DEST/.git" ]; then
-  git -C "$DEST" pull --ff-only -q || die "non riesco ad aggiornare $DEST: guarda 'git -C $DEST status'"
-  ok "aggiornato in $DEST"
+  git -C "$DEST" pull --ff-only -q || die "cannot update $DEST: look at 'git -C $DEST status'"
+  ok "updated in $DEST"
 elif gh repo clone "$REPO" "$DEST" -- -q 2> /dev/null; then
-  ok "clonato in $DEST"
+  ok "cloned in $DEST"
 else
-  die "il tuo utente GitHub ($utente) non vede il repo $REPO. Chiedi a chi ti ha invitato in Cato di
-    aggiungerti al team giusto, poi rilancia questo comando."
+  die "your GitHub user ($utente) cannot see the $REPO repo. Ask whoever invited you to Cato to
+    add you to the right team, then run this command again."
 fi
 # I comandi di sempre stanno in ~/.cato-setup: un link alla cartella bootstrap/ li tiene validi.
 if [ ! -e "$LINK" ] && [ ! -L "$LINK" ]; then
