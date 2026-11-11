@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="it">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Installa Cato sul tuo Mac</title>
-<meta name="description" content="Una riga nel Terminale e il tuo Mac è pronto per lavorare con Cato.">
+<title>Install Cato on your Mac</title>
+<meta name="description" content="One line in Terminal and your Mac is ready to work with Cato.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>
   :root{
@@ -56,21 +56,21 @@
     <source srcset="logo-bianco.svg" media="(prefers-color-scheme: dark)">
     <img class="logo" src="logo.svg" alt="Cato" width="122" height="34">
   </picture>
-  <h1>Installa Cato sul tuo Mac</h1>
-  <p class="lede">Copia una riga, incollala nel Terminale, e il tuo Mac si prepara da solo.</p>
+  <h1>Install Cato on your Mac</h1>
+  <p class="lede">Copy one line, paste it into Terminal, and your Mac sets itself up.</p>
 
   <div class="card">
     <div class="cmd">
       <code id="riga">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/AppaltiGPT/dev-env-install/main/install.sh)"</code>
-      <button id="copia" type="button">Copia</button>
+      <button id="copia" type="button">Copy</button>
     </div>
-    <p class="nota" id="esito">Premi «Copia», poi segui i tre passi.</p>
+    <p class="nota" id="esito">Press "Copy", then follow the three steps.</p>
   </div>
 
   <ol>
-    <li><div><p class="t">Apri il Terminale</p><p class="d">Premi <kbd>⌘</kbd> <kbd>Spazio</kbd>, scrivi <b>Terminale</b> e premi <kbd>Invio</kbd>.</p></div></li>
-    <li><div><p class="t">Incolla la riga e premi Invio</p><p class="d">Premi <kbd>⌘</kbd> <kbd>V</kbd>, poi <kbd>Invio</kbd>. Il Mac ti chiede la sua password una volta: mentre la scrivi non compare niente, è normale.</p></div></li>
-    <li><div><p class="t">Entra con GitHub quando si apre il browser</p><p class="d">Succede due o tre volte, ogni volta è un clic. Quando il Terminale si ferma e ti dice cosa fare dopo, hai finito.</p></div></li>
+    <li><div><p class="t">Open Terminal</p><p class="d">Press <kbd>⌘</kbd> <kbd>Space</kbd>, type <b>Terminal</b> and press <kbd>Return</kbd>.</p></div></li>
+    <li><div><p class="t">Paste the line and press Return</p><p class="d">Press <kbd>⌘</kbd> <kbd>V</kbd>, then <kbd>Return</kbd>. The Mac asks for its password once: nothing shows while you type it, that's normal.</p></div></li>
+    <li><div><p class="t">Sign in with GitHub when the browser opens</p><p class="d">It happens two or three times, one click each. When Terminal stops and tells you what to do next, you're done.</p></div></li>
   </ol>
 
 
@@ -83,15 +83,15 @@
     const testo = r.textContent;
     try {
       await navigator.clipboard.writeText(testo);
-      b.textContent = 'Copiato';
+      b.textContent = 'Copied';
       b.classList.add('copiato');
-      e.textContent = 'Copiato. Ora apri il Terminale e incollala (⌘ V).';
+      e.textContent = 'Copied. Now open Terminal and paste it (⌘ V).';
     } catch (_) {
       const s = window.getSelection(); const rg = document.createRange();
       rg.selectNodeContents(r); s.removeAllRanges(); s.addRange(rg);
-      e.textContent = 'Ho selezionato la riga: premi ⌘ C per copiarla.';
+      e.textContent = 'I selected the line: press ⌘ C to copy it.';
     }
-    setTimeout(() => { b.textContent = 'Copia'; b.classList.remove('copiato'); }, 2500);
+    setTimeout(() => { b.textContent = 'Copy'; b.classList.remove('copiato'); }, 2500);
   });
 </script>
 </body>

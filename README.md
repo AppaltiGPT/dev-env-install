@@ -1,17 +1,17 @@
 # dev-env-install
 
-Il primo passo per installare l'ambiente di lavoro Cato su un Mac. Apri il Terminale e incolla:
+The first step to install the Cato work environment on a Mac. Open Terminal and paste:
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/AppaltiGPT/dev-env-install/main/install.sh)"
 ```
 
-Installa Homebrew e la CLI di GitHub, ti fa entrare con il tuo utente GitHub (si apre il browser) e
-scarica il repo privato del dev-env. Da lì in poi decide lui cosa installare, in base ai permessi che
-ti sono stati dati: non devi scegliere niente.
+It installs Homebrew and the GitHub CLI, signs you in with your GitHub user (the browser opens) and
+downloads the private dev-env repo. From there on it decides what to install, based on the access
+you've been given: you don't have to choose anything.
 
-Se ti dice che il tuo utente non vede il repo, chiedi a chi ti ha invitato di aggiungerti al team
-giusto e rilancia lo stesso comando: rifà solo quello che manca.
+If it says your user can't see the repo, ask whoever invited you to add you to the right team and
+run the same command again: it only redoes what is missing.
 
-Questo repo è pubblico perché è il pezzo che serve **prima** di avere accesso a qualcosa. Per questo
-contiene solo `install.sh`, che non porta segreti né nomi di sistemi interni.
+This repo is public because it is the piece you need **before** you have access to anything. That is
+why it only contains `install.sh`, which carries no secrets and no names of internal systems.
